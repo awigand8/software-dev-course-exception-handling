@@ -57,11 +57,25 @@ while (true) {
     if (action === "add") {
         let animal = readlineSync.question("Enter the animal's name: ");
         let fee = Number(readlineSync.question("Enter the adoption fee: "));
+
+        try{ 
+            //user provides a negative adoption fee
+        
         addAnimal(animal, fee);
         console.log(`${animal} added with a fee of $${fee}.`);
+        }catch(e) {
+            console.log(e.message);
+        }
     } else if (action === "fee") {
         let animal = readlineSync.question("Enter the animal's name to find its adoption fee: ");
+
+        try{
+            //user tries to find the fee for an animal that hasn’t been added
+      
         console.log(`${animal}'s adoption fee is $${getAdoptionFee(animal)}.`);
+          }catch(e) {
+            console.log(e.message)
+        }
     } else {
         console.log("Invalid action. Please choose 'add', 'fee', or 'exit'.");
     }
@@ -78,6 +92,7 @@ Invalid Input Errors:
 
 Code Flow Problems:
   What happens if the program throws an exception? Does the rest of the code continue running?
+  // ANSWER: It would stop executing the program. No the code wouldnt keep running
 
 Structured Exception Handling:
   Add try/catch blocks to handle the above errors gracefully.
